@@ -277,7 +277,9 @@ void LaserscanMerger::pointcloud_to_laserscan(
   sensor_msgs::LaserScanPtr output(new sensor_msgs::LaserScan());
   output->header = pcl_conversions::fromPCL(merged_cloud->header);
   output->header.frame_id = destination_frame_.c_str();
-  output->header.stamp = ros::Time::now(); // fixes #265
+  output->header.stamp =
+    pcl_conversions::fromPCL(merged_cloud->header).stamp;
+  // output->header.stamp = ros::Time::now(); // fixes #265
   output->angle_min = this->angle_min_;
   output->angle_max = this->angle_max_;
   output->angle_increment = this->angle_increment_;

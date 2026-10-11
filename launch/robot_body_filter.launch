@@ -1,0 +1,13 @@
+<launch>
+  <node pkg="laser_filters"
+        type="scan_to_scan_filter_chain"
+        name="robot_body_filter"
+        output="screen">
+
+    <rosparam command="load"
+              file="$(find laserscan_merger)/config/robot_body_filter.yaml"/>
+
+    <remap from="scan" to="/scan_multi_raw"/>
+    <remap from="scan_filtered" to="/scan_multi"/>
+  </node>
+</launch>
